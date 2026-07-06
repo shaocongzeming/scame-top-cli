@@ -160,7 +160,7 @@ def cmd_price(args):
     prices = fetch_prices(args.base, get_password(args))
     rec = prices.get(norm(args.code))
     if not rec:
-        print(f"面价表无此型号:{args.code}", file=sys.stderr)
+        print(f"{args.code} 不在常用面价表(349 个常用型号)内,询价请咨询商务。", file=sys.stderr)
         sys.exit(1)
     emit(rec, args.json, f"{rec['product_code']}  面价 ¥{rec['面价_pcs']}  起订 {rec.get('最小起订量', '-')}  {rec.get('产品描述', '')}")
 
@@ -187,7 +187,7 @@ def cmd_quote(args):
         code, qty = norm(code_raw), int(qty_raw)
         rec = prices.get(code)
         if not rec:
-            lines.append({"product_code": code, "quantity": qty, "error": "面价表无此型号"})
+            lines.append({"product_code": code, "quantity": qty, "error": "不在常用面价表,询价请咨询商务"})
             continue
         subtotal = round(rec["面价_pcs"] * qty, 2)
         total += subtotal
