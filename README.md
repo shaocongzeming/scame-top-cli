@@ -44,3 +44,14 @@ ln -s "/path/to/2026_SCAME_面价表_包含选型型号.csv" data/price_list.csv
 | `recommend by-scenario/alternative` | 智能推荐 |
 | `catalog categories/export` | 产品目录 |
 
+---
+
+<div align="center">
+
+**北京韶聪泽明智能科技有限责任公司 · Zecrew**
+
+垂直行业 AI 数字员工
+
+🌐 [zecrew.com](https://zecrew.com)
+
+</div>
