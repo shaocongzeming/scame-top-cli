@@ -1,60 +1,37 @@
 # SCAME-CLI
 
-SCAME 工业连接器产品查询与报价命令行工具。
+SCAME 工业连接器的产品参数查询、面价查询、库存查询和简易报价工具。
 
-## 快速开始
+## 运行
 
-```bash
-# 安装依赖
-pip install -e .
-
-# 查询产品
-scame-cli product search "213.1630"
-
-# 按参数筛选
-scame-cli product filter --ip IP67 --current 63A
-
-# 生成报价
-scame-cli pricing quote --items "213.1630:50,C3444:30" --discount 0.75
-
-# JSON 输出（Agent 模式）
-scame-cli --json product filter --ip IP67 --current 63A
-
-# 交互式 REPL
-scame-cli
-```
-
-## 数据源
-
-面价表 CSV 位于 `data/` 目录（symlink 到原始数据）：
+需要 Python 3 和 `cryptography`：
 
 ```bash
-# 首次设置：创建数据目录并链接面价表
-mkdir -p data
-ln -s "/path/to/2026_SCAME_面价表_包含选型型号.csv" data/price_list.csv
+python3 -m pip install cryptography
+python3 scame_cli.py search 63A 3P+N+E IP67
+python3 scame_cli.py info 213.1630 --json
 ```
 
-## 命令
+技术参数可直接查询；面价、库存和报价需要使用者已配置有效授权码。配置方法见 [技能说明](scame-cli-skill/SKILL.md)。
 
-| 命令组 | 说明 |
-|--------|------|
-| `product search/filter/info/compare` | 产品查询 |
-| `pricing price/quote/history` | 报价管理 |
-| `stock check/available` | 库存查询 |
-| `recommend by-scenario/alternative` | 智能推荐 |
-| `catalog categories/export` | 产品目录 |
+```bash
+python3 scame_cli.py price 213.1630 --json
+python3 scame_cli.py stock 423.6367 --json
+python3 scame_cli.py quote 213.1630x10 --json
+```
+
+## 数据说明
+
+数据来自选型工具服务。面价和库存通过授权码在本地解密；授权码应仅保存在使用者自己的环境中。
+
+面价是目录价格，不等于实际成交价。库存为快照，订单交期和可用量请与商务或仓库确认。
+
+## License
+
+见 [LICENSE](LICENSE)。
 
 ---
 
-<div align="center">
+**班底 Zecrew** · 北京韶聪泽明智能科技有限责任公司
 
-**韶聪泽明 · 班底 Zecrew**
-
-北京韶聪泽明智能科技有限责任公司
-
-企业数字员工 · 企业 AI 落地服务 · FDE
-
-WaytoAGI 模数OPC 社区
-
-
-</div>
+[官网](https://zecrew.shaocongzeming.com)
